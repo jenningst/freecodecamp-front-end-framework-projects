@@ -1,0 +1,32 @@
+{
+  "name": "freecodecamp-front-end-framework-projects",
+  "version": "1.0.0",
+  "description": "freeCodeCamp random quote machine",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"  
+  },
+  "keywords": [
+    "react",
+    "freeCodeCamp"
+  ],
+  "author": "Troy Jennings",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^5.7.0",
+    "prop-types": "^15.6.2",
+    "re-base": "^4.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "react-scripts": "^2.1.1",
+    "sass": "^1.15.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
