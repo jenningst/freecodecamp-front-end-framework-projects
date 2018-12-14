@@ -1,7 +1,7 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
 import Quote from './Quote';
-import { getQuote, test } from '../helpers';
+import { getQuote } from '../helpers';
 
 class App extends React.Component {
     state = {
@@ -11,13 +11,13 @@ class App extends React.Component {
 
     componentDidMount() {
         // initialize our quote upon mounting
-        const q = getQuote();
-        this.setState({ quote: q.quote, author: q.author });
+        const quote = getQuote();
+        this.setState({ quote: quote.quote, author: quote.author });
     }
 
     loadQuote = () => {
-        const q = getQuote();
-        this.setState({ quote: q.quote, author: q.author });
+        const quote = getQuote();
+        this.setState({ quote: quote.quote, author: quote.author });
     }
 
     render() {

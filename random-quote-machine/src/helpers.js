@@ -42,8 +42,3 @@ export function getQuote() {
 
     return quotes[`quote${rando(1, Object.keys(quotes).length)}`];
 }
-
-export function test() {
-    const q = getQuote();
-    return q;
-}
