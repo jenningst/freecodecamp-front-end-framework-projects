@@ -7,7 +7,6 @@
 }
 
 .quote-box {
-<<<<<<< HEAD
     min-width: 400px;
     max-width: 750px;
     margin: 0 auto 0 auto;
@@ -15,30 +14,18 @@
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 1em 1em 2em black;
-=======
-    max-width: 500px;
-    margin: 4rem;
-    padding: 40px;
->>>>>>> dee265972133eb10679f09be723106c4ef858927
     background: white;
 }
 
 .btn-container {
     display: flex;
     flex-direction: row;
-<<<<<<< HEAD
     justify-content: center;
     width: 100%;
-=======
-    justify-content: space-between;
-    width: 100%;
-    margin: 3rem auto 0 auto;
->>>>>>> dee265972133eb10679f09be723106c4ef858927
 }
 
 .quote-box__text {
     font-family: 'Anton', sans-serif;
-<<<<<<< HEAD
     text-align: center;
 }
 
@@ -69,30 +56,3 @@
     font-size: 2em;
   }
 }
-=======
-}
-
-.quote-box__author {
-    font-family: 'Lato', cursive;
-    font-style: italic;
-    margin-top: 2rem;
-}
-
-.quote-box__new-quote {
-    border: none;
-}
-
-.quote-box__tweet {
-    border: none;
-}
-
-.new-quote-img {
-    height: 7rem;
-    width: auto;
-}
-
-.tweet-img {
-    height: 8rem;
-    width: auto;
-}
->>>>>>> dee265972133eb10679f09be723106c4ef858927
