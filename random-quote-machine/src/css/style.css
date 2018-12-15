@@ -37,18 +37,19 @@
     font-style: italic;
 }
 
-.btn {
-    float: right;
+button {
     border: none;
+    outline: none;
 }
 
 .btn-img {
     height: 50px;
     width: auto;
+    margin: 5px;
 }
 
-.button:hover {
-    background: red;
+button:hover {
+    transform: scale(1.2);
 }
 
 @media only screen and (max-width: 768px) {

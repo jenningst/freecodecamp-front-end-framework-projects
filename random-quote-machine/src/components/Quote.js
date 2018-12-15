@@ -16,10 +16,10 @@ class Quote extends React.Component {
               {this.props.author}
             </p>
             <div className="btn-container">
-              <button id="new-quote" className="quote-box__new-quote btn" onClick={this.props.loadQuote}>
+              <button id="new-quote" className="quote-box__new-quote " onClick={this.props.loadQuote}>
                 <img src="/assets/larry.png" className="new-quote-img btn-img" title="Click for a new quote!" alt="larry head"/>
               </button>
-              <button id="tweet-quote" className="quote-box__tweet btn btn-default" target="_blank" href="twitter.com/intent/tweet">
+              <button id="tweet-quote" className="quote-box__tweet" target="_blank" href="twitter.com/intent/tweet">
                 <img src="/assets/twitter-icon.png" className="tweet-img btn-img" title="Tweet quote!" alt="twitter icon" />
               </button>
             </div>
