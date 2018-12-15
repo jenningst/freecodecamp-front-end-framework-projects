@@ -7,44 +7,52 @@
 }
 
 .quote-box {
-    max-width: 500px;
-    margin: 4rem;
+    min-width: 400px;
+    max-width: 750px;
+    margin: 0 auto 0 auto;
     padding: 40px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 1em 1em 2em black;
     background: white;
 }
 
 .btn-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
-    margin: 3rem auto 0 auto;
 }
 
 .quote-box__text {
     font-family: 'Anton', sans-serif;
+    text-align: center;
 }
 
 .quote-box__author {
+    margin-right: 2rem;
+    text-align: right;
     font-family: 'Lato', cursive;
+    font-size: 20px;
     font-style: italic;
-    margin-top: 2rem;
 }
 
-.quote-box__new-quote {
+.btn {
+    float: right;
     border: none;
 }
 
-.quote-box__tweet {
-    border: none;
-}
-
-.new-quote-img {
-    height: 7rem;
+.btn-img {
+    height: 50px;
     width: auto;
 }
 
-.tweet-img {
-    height: 8rem;
-    width: auto;
+.button:hover {
+    background: red;
+}
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
 }
