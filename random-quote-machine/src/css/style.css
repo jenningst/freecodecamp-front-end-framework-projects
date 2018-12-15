@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background: blue;
+}
+
+.quote-box {
+    max-width: 500px;
+    margin: 4rem;
+    padding: 40px;
+    background: white;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 3rem auto 0 auto;
+}
+
+.quote-box__text {
+    font-family: 'Anton', sans-serif;
+}
+
+.quote-box__author {
+    font-family: 'Lato', cursive;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+.quote-box__new-quote {
+    border: none;
+}
+
+.quote-box__tweet {
+    border: none;
+}
+
+.new-quote-img {
+    height: 7rem;
+    width: auto;
+}
+
+.tweet-img {
+    height: 8rem;
+    width: auto;
+}
