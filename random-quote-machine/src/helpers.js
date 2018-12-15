@@ -28,16 +28,28 @@ export function getQuote() {
         },
         quote3: {
             author: "Larry David",
-            quote: "Funkhouser knowingly served us penis!"
+            quote: "You're black and your last name is Black? That's like if my name was Larry Jew."
         },
         quote4: {
             author: "Larry David",
-            quote: "You're black and your last name is Black? That's like if my name was Larry Jew."
+            quote: "I've been in therapy. I know enough about myself now to know that I really don't need to know anymore."
         },
         quote5: {
             author: "Larry David",
-            quote: "F**k Hhhhugh."
+            quote: "He wanted a stop and chat with me, and I don't know him well enough for a stop and chat!"
         },
+        quote6: {
+            author: "Larry David",
+            quote: "I'd rather have the thieves than the neighbors - the thieves don't impose. Thieves just want your things, neighbors want your time."
+        },
+        quote7: {
+            author: "Larry David",
+            quote: "You can't make an empty gesture to a Funkhouser. They take you up on it!"
+        },
+        quote8: {
+            author: "Larry David",
+            quote: "My grandfather was Harold Bingo and he invented bingo."
+        }
     }
 
     return quotes[`quote${rando(1, Object.keys(quotes).length)}`];
