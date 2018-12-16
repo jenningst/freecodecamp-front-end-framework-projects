@@ -13,7 +13,12 @@
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
+> install npm
+
+```shell
+$ npm install
+$ npm --version
+```
 
 > update and install this package first
 
