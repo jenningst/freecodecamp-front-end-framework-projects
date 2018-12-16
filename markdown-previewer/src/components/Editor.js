@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class App extends Component {
+class Editor extends Component {
     render() {
         return (
             <div>
-                <Editor />
-                <Previewer />
+                <textarea name="editor-pane" id="editor" cols="30" rows="10"></textarea>
             </div>
         );
     }
 }
 
-App.propTypes = {
+Editor.propTypes = {
 
 };
 
-export default App;
+export default Editor;
