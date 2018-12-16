@@ -19,16 +19,12 @@ class Quote extends React.Component {
               <button id="new-quote" className="quote-box__new-quote " onClick={this.props.loadQuote}>
                 <img src="/assets/larry.png" className="new-quote-img btn-img" title="Click for a new quote!" alt="larry head"/>
               </button>
-              <button id="tweet-quote" className="quote-box__tweet" target="_blank" href="twitter.com/intent/tweet">
+              <a id="tweet-quote" className="quote-box__tweet" target="_blank" href="twitter.com/intent/tweet">
                 <img src="/assets/twitter-icon.png" className="tweet-img btn-img" title="Tweet quote!" alt="twitter icon" />
-              </button>
+              </a>
             </div>
           </div>;
     }
 }
-
-Quote.propTypes = {
-
-};
 
 export default Quote;

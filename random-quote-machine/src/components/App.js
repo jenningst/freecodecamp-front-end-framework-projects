@@ -1,5 +1,4 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 import Quote from './Quote';
 import { getQuote } from '../helpers';
 
@@ -26,9 +25,5 @@ class App extends React.Component {
           </div>;
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
