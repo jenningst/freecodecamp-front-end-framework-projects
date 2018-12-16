@@ -5,7 +5,7 @@ class Previewer extends Component {
     render() {
         return (
             <div>
-                <textarea name="preview-pane" id="preview" cols="30" rows="10"></textarea>
+                <textarea name="preview-pane" id="" cols="30" rows="10">{this.props.text}</textarea>
             </div>
         );
     }
