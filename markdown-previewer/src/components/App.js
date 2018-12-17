@@ -8,8 +8,7 @@ class App extends Component {
         text: ""
     }
 
-    updateText = (char) => {
-        const updatedText = this.state.text + char;
+    updateText = (updatedText) => {
         this.setState({
             text: updatedText
         })
@@ -17,14 +16,10 @@ class App extends Component {
 
     render() {
         return <div className="wrapper">
-            <Editor updateText={this.updateText} />
+            <Editor text={this.state.text} updateText={this.updateText} />
             <Previewer text={this.state.text} />
           </div>;
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;

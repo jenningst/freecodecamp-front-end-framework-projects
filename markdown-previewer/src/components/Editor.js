@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 class Editor extends Component {
     
     handleChange = (event) => {
-        this.props.updateText(event.key);
+        //const updatedText = this.props.text + event.currentTarget.value;
+        this.props.updateText(event.currentTarget.value);
     }
     
     render() {
         return <div>
-            <textarea name="editor-pane" id="editor" cols="30" rows="10" onKeyDown={this.handleChange} />
+            <textarea name="markdown" onChange={this.handleChange} />
           </div>;
     }
 }

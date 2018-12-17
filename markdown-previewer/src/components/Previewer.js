@@ -5,12 +5,10 @@ class Previewer extends Component {
     render() {
         return (
             <div>
-                <textarea name="preview-pane" id="" cols="30" rows="10">{this.props.text}</textarea>
+                <textarea name="markdown" value={this.props.text} />
             </div>
         );
     }
 }
-
-Previewer.propTypes = {};
 
 export default Previewer;
