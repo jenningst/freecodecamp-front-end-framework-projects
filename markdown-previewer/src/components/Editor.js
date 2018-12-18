@@ -12,9 +12,11 @@ class Editor extends Component {
 
   render() {
     return (
-      <div
-        id="editor" className="pane">
+      <div className="pane editor-pane">
+        <h2 className="editor-pane__header">Editor</h2>
         <textarea
+          id="editor"
+          rows="35"
           name="markup"
           value={this.props.text}
           onChange={this.handleChange}

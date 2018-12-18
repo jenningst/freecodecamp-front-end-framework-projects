@@ -18,13 +18,10 @@ class Previewer extends Component {
 
   render() {
     const textToBeRendered = this.markUp(this.props.text);
-    return (
-      <div
-        id="preview"
-        className="pane"
-        dangerouslySetInnerHTML={{ __html: textToBeRendered }}
-      />
-    );
+    return <div className="pane preview-pane">
+      <h2 className="preview-pane__header">Previewer</h2>
+        <div id="preview" dangerouslySetInnerHTML={{ __html: textToBeRendered }} />
+      </div>;
   }
 }
 
