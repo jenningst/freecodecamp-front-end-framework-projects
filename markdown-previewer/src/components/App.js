@@ -3,14 +3,12 @@ import Editor from './Editor';
 import Previewer from './Previewer';
 import { initialText } from '../helpers';
 
-
 class App extends Component {
     state = {
         text: ""
     }
 
     componentDidMount() {
-        // load initial markdown
         this.setState({ text: initialText })
     }
 

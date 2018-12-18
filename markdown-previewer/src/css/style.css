@@ -1,16 +1,44 @@
+body {
+    background: #21252b;
+}
+
 .wrapper {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: stretch;
 }
 
+.header {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #91c074;
+}
+
 .pane {
-    flex-grow: 1;
-    flex-basis: 50%;
+    flex-basis: 75%;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #282c34;
+    border-radius: 5px;
+}
+
+.editor-pane__header {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#preview {
+    background: #f2f2f2;
 }
 
 textarea {
     resize: vertical;
     outline: none;
-    resize: none;
+    width: 100%;
+    font-size: 100%;
+    color: #e63c47ff;
 }
