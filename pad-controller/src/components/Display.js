@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Display extends Component {
+    static propTypes = {
+        sound: PropTypes.string
+    }
+    
     render() {
         return (
             <div id="display" className="control-panel">
@@ -14,9 +18,5 @@ class Display extends Component {
         );
     }
 }
-
-Display.propTypes = {
-
-};
 
 export default Display;

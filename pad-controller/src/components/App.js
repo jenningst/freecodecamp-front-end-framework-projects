@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Display from './Display';
 import PadBank from './PadBank';
 import padSamples from '../pad-samples';
@@ -11,12 +10,12 @@ class App extends Component {
         sound: ""
     }
 
-    loadPadSamples() {
+    loadPadSamples =() => {
         this.setState({ pads: padSamples });
     }
 
-    loadDisplayText(text) {
-        this.setState({ text });
+    loadDisplayText = (text) => {
+        this.setState({ sound: text });
     }
 
     componentDidMount() {
@@ -30,9 +29,5 @@ class App extends Component {
           </div>;
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
