@@ -7,7 +7,8 @@ class App extends Component {
     
     state = {
         pads: {},
-        sound: ""
+        sound: "",
+        lastPlayed: ""
     }
 
     loadPadSamples =() => {
@@ -18,6 +19,15 @@ class App extends Component {
         this.setState({ sound: text });
     }
 
+    componentWillMount() {
+        document.addEventListener("keypress", event => {
+            const keyName = event.key;
+            if (typeof keyName == 'number') {
+                this.setState({ lastPlayed : keyName })
+            }
+        });
+    }
+
     componentDidMount() {
         this.setState({ pads: padSamples });
     }
@@ -25,7 +35,7 @@ class App extends Component {
     render() {
         return <div id="drum-machine">
             <Display sound={this.state.sound} />
-            <PadBank pads={this.state.pads} loadDisplayText={this.loadDisplayText} />
+            <PadBank pads={this.state.pads} loadDisplayText={this.loadDisplayText} lastPlayed={this.state.lastPlayed}/>
           </div>;
     }
 }

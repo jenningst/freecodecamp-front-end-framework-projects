@@ -15,6 +15,7 @@ class PadBank extends Component {
                 index={key}
                 details={this.props.pads[key]}
                 loadDisplayText={this.props.loadDisplayText}
+                lastPlayed={this.props.lastPlayed}
               />
             ))}
           </div>;
