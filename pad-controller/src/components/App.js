@@ -8,29 +8,24 @@ class App extends Component {
     state = {
         pads: {},
         sound: "",
-        hotkey: "",
-        lastPlayed: ""
     }
 
-    loadPadSamples =() => {
-        this.setState({ pads: padSamples });
+    setDisplayText = (key) => {
+        this.setState({ sound: padSamples[`pad${key}`].clipDesc})
     }
 
-    loadDisplayText = (text) => {
-        this.setState({ sound: text });
-    }
-
-    playSound = (audio) => {
+    playSound = (key) => {
+        this.audio = new Audio(padSamples[`pad${key}`].clipSource)
+        this.audio.currentTime = 0;
         this.audio.play();
     }
 
     handleKeyPress = (e) => {
-        if (e.which === 49) {
-            let padSource = `pad${e.key}`
-            this.audio = new Audio(padSamples[padSource].clipSource);
-            this.playSound(this.audio);
-        } else if (e.which === 50) {
-            console.log(2);   
+        let key = e.key.toLowerCase();
+        const validKeys = ["q", "w", "e", "a", "s", "d", "z", "x", "c"];
+        if (validKeys.indexOf(key) > -1) {
+            this.playSound(key.toUpperCase());
+            this.setDisplayText(key.toUpperCase());
         }
     }
 
@@ -46,7 +41,12 @@ class App extends Component {
     render() {
         return <div id="drum-machine">
             <Display sound={this.state.sound} />
-            <PadBank pads={this.state.pads} loadDisplayText={this.loadDisplayText} lastPlayed={this.state.lastPlayed}/>
+            <PadBank 
+                pads={this.state.pads} 
+                handleKeyPress={this.handleKeyPress} 
+                setDisplayText={this.setDisplayText}
+                playSound={this.playSound}
+            />
           </div>;
     }
 }
