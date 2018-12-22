@@ -8,6 +8,7 @@ class App extends Component {
     state = {
         pads: {},
         sound: "",
+        hotkey: "",
         lastPlayed: ""
     }
 
@@ -19,17 +20,27 @@ class App extends Component {
         this.setState({ sound: text });
     }
 
-    componentWillMount() {
-        document.addEventListener("keypress", event => {
-            const keyName = event.key;
-            if (typeof keyName == 'number') {
-                this.setState({ lastPlayed : keyName })
-            }
-        });
+    playSound = (audio) => {
+        this.audio.play();
+    }
+
+    handleKeyPress = (e) => {
+        if (e.which === 49) {
+            let padSource = `pad${e.key}`
+            this.audio = new Audio(padSamples[padSource].clipSource);
+            this.playSound(this.audio);
+        } else if (e.which === 50) {
+            console.log(2);   
+        }
     }
 
     componentDidMount() {
         this.setState({ pads: padSamples });
+        window.addEventListener('keydown', this.handleKeyPress);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyPress);
     }
 
     render() {

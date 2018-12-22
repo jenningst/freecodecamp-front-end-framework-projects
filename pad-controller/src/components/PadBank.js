@@ -15,6 +15,7 @@ class PadBank extends Component {
                 index={key}
                 details={this.props.pads[key]}
                 loadDisplayText={this.props.loadDisplayText}
+                handleKeyPress={this.props.handleKeyPress}
                 lastPlayed={this.props.lastPlayed}
               />
             ))}
