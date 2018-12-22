@@ -1,57 +1,57 @@
 const pads = {
-  pad1: {
+  padQ: {
     altFunction: "1/4",
     clipSource: "/samples/kick.mp3",
     clipDesc: "Kick 1",
-    keyMapping: "1"
+    keyBinding: "q"
   },
-  pad2: {
+  padW: {
     altFunction: "1/8",
     clipSource: "/samples/kick2.mp3",
     clipDesc: "Kick 2",
-    keyMapping: "2"
+    keyBinding: "w"
   },
-  pad3: {
+  padE: {
     altFunction: "1/16",
     clipSource: "/samples/kick3.mp3",
     clipDesc: "Kick 3",
-    keyMapping: "3"
+    keyBinding: "e"
   },
-  pad4: {
+  padA: {
     altFunction: "1/4 T",
     clipSource: "/samples/snare.mp3",
     clipDesc: "Snare 1",
-    keyMapping: "4"
+    keyBinding: "a"
   },
-  pad5: {
+  padS: {
     altFunction: "1/8 T",
     clipSource: "/samples/snare2.mp3",
     clipDesc: "Snare 2",
-    keyMapping: "5"
+    keyBinding: "s"
   },
-  pad6: {
+  padD: {
     altFunction: "1/16 T",
     clipSource: "/samples/snare3.mp3",
     clipDesc: "Snare 3",
-    keyMapping: "6"
+    keyBinding: "d"
   },
-  pad7: {
+  padZ: {
     altFunction: "SWING OFF",
     clipSource: "/samples/airhorn.mp3",
     clipDesc: "Airhorn",
-    keyMapping: "7"
+    keyBinding: "z"
   },
-  pad8: {
+  padX: {
     altFunction: "EXT CLOCK",
     clipSource: "/samples/snap.mp3",
     clipDesc: "Snap",
-    keyMapping: "8"
+    keyBinding: "x"
   },
-  pad9: {
+  padC: {
     altFunction: "TAP TEMPO",
     clipSource: "/samples/ross.mp3",
     clipDesc: "Ross",
-    keyMapping: "9"
+    keyBinding: "c"
   },
 };
 

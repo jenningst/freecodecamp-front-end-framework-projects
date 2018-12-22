@@ -8,34 +8,45 @@ class App extends Component {
     state = {
         pads: {},
         sound: "",
-        lastPlayed: ""
     }
 
-    loadPadSamples =() => {
-        this.setState({ pads: padSamples });
+    setDisplayText = (key) => {
+        this.setState({ sound: padSamples[`pad${key}`].clipDesc})
     }
 
-    loadDisplayText = (text) => {
-        this.setState({ sound: text });
+    playSound = (key) => {
+        this.audio = new Audio(padSamples[`pad${key}`].clipSource)
+        this.audio.currentTime = 0;
+        this.audio.play();
     }
 
-    componentWillMount() {
-        document.addEventListener("keypress", event => {
-            const keyName = event.key;
-            if (typeof keyName == 'number') {
-                this.setState({ lastPlayed : keyName })
-            }
-        });
+    handleKeyPress = (e) => {
+        let key = e.key.toLowerCase();
+        const validKeys = ["q", "w", "e", "a", "s", "d", "z", "x", "c"];
+        if (validKeys.indexOf(key) > -1) {
+            this.playSound(key.toUpperCase());
+            this.setDisplayText(key.toUpperCase());
+        }
     }
 
     componentDidMount() {
         this.setState({ pads: padSamples });
+        window.addEventListener('keydown', this.handleKeyPress);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyPress);
     }
 
     render() {
         return <div id="drum-machine">
             <Display sound={this.state.sound} />
-            <PadBank pads={this.state.pads} loadDisplayText={this.loadDisplayText} lastPlayed={this.state.lastPlayed}/>
+            <PadBank 
+                pads={this.state.pads} 
+                handleKeyPress={this.handleKeyPress} 
+                setDisplayText={this.setDisplayText}
+                playSound={this.playSound}
+            />
           </div>;
     }
 }
