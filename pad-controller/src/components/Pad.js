@@ -29,13 +29,19 @@ class Pad extends Component {
     }
     
     render() {
-        return <div 
-            id={this.props.desc} 
-            className="drum-pad" 
-            onClick={this.handleClickOrPress} 
-            onKeyDown={this.handleClickOrPress}>
-            <audio id={this.props.index} className="clip" src={this.props.sound} />
-            <span className="drum-pad__label">{this.props.index}</span>
+        return <div className="pad-container">
+            <div 
+                id={this.props.desc} 
+                className="drum-pad" 
+                onClick={this.handleClickOrPress} 
+                onKeyDown={this.handleClickOrPress}>
+                <audio id={this.props.index} className="clip" src={this.props.sound} />
+                <span className="drum-pad__binding">{this.props.index}</span>
+            </div>
+            <div className="drum-pad__label">
+                <div className="pad-id">PAD {this.props.index}</div>
+                <div className="pad-func">{this.props.func}</div>
+            </div>
         </div>
     }
 }

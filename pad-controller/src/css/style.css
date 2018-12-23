@@ -1,15 +1,21 @@
 /*************** FLEX CONTAINERS ***************/
-.all-controls, .control-panel, .knob-row, .button-row, .pad-panel {
+.header, .all-controls, .control-panel, .knob-row, .button-row, .pad-panel, .drum-pad__label {
     display: -webkit-flex;
     display: flex;
 }
 
-.all-controls, .knob-row, .button-row {
+.all-controls, .knob-row, .button-row, .pad-panel {
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
 }
 
-.display, .control-panel, .pad-panel {
+.header, .drum-pad__label {
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.header, .display-pane, .control-panel, .pad-panel {
     width: 100%;
 }
 
@@ -20,20 +26,29 @@
 }
 
 .knob-panel {
-    padding-top: 20px;
+    padding-top: 5px;
     padding-bottom: 30px;
 }
 
-.knob-row, .button-row {
+.pad-panel {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.knob-row, .button-row, .pad-panel {
     justify-content: space-evenly;
 }
 
-.pad-panel {
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap;
+/*************** FLEX ITEMS ***************/
+.name-container {
+    padding-left: 30px;
+    text-align: center;
 }
 
-/*************** FLEX ITEMS ***************/
+.model-container {
+    padding-right: 30px;
+}
+
 .button-panel__button {
     width: 50px;
     height: 40px;
@@ -45,7 +60,56 @@
     border-radius: 3px;
 }
 
+.drum-pad__label {
+    margin: 4px 0px 0px 0px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    font-size: .5rem;
+    color: white;
+}
+
 /*************** STANDARD ITEMS ***************/
+.header {
+    background: #262626;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.header__name, .model-container {
+    margin-bottom: 0px;
+    color: white;
+}
+
+.header__line {
+    margin-top: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
+    background: white;
+    color: black;
+    font-size: .8rem;
+}
+
+.display-pane {
+    text-align: center;
+    background: #262626;
+}
+
+.display {
+    display: inline-block;
+    width: 90%;
+    padding-top: 4px;
+    padding-left: 4px;
+    padding-bottom: 4px;
+    background:#2d7fed;
+    color: white;
+    text-align: left;
+    border-radius: 2px;
+}
+
+.control-panel {
+    background: #262626;
+    border-bottom-left-radius: 15px;
+}
 
 .button-container {
     padding-bottom: 20px;
@@ -58,15 +122,22 @@
     color: white;
 }
 
-.nr-config__label {
-    background: white;
-    color: black;
-    border-radius: 3px;
+.pad-panel {
+    background: #262626;
+    border-bottom-right-radius: 15px;
 }
 
-.full-level__button {
-    background: #ff9999;
-    border-color: #ff4d4d;
+.drum-pad {
+    width: 125px;
+    height: 125px;
+    padding-top: auto;
+    padding-bottom: auto;
+    background: green;
+    text-align: center;
+    border-radius: 5px;
+    border: solid #ff4d4d 2px;
+    background: #181818;
+    color: #181818;
 }
 
 .dial {
@@ -102,17 +173,23 @@
     content: "";
 }
 
-/*************** TEMP COLORS ***************/
-.display {
-    background:#2d7fed;
+/*************** ONE-OFF EXCEPTIONS ***************/
+.pad-func {
+    color: black;
+    background: white;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
-.control-panel {
-    background: #262626;
+.nr-config__label {
+    background: white;
+    color: black;
+    border-radius: 3px;
 }
 
-.pad-panel {
-    background: mediumspringgreen;
+.full-level__button {
+    background: #ff9999;
+    border-color: #ff4d4d;
 }
 
 /** media queries **/
@@ -130,7 +207,7 @@
 @media (min-width: 800px) {
     /* fixed width drum-machine */
     .all-controls {
-        width: 800px;
+        width: 630px;
         margin-left: auto;
         margin-right: auto;
     }
