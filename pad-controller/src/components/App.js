@@ -5,7 +5,7 @@ import ControlBank from './ControlBank';
 
 class App extends Component {
     state = {
-        sound: "",
+        sound: "Waiting for sound...",
     }
 
     setDisplayText = (sound) => {
@@ -20,8 +20,17 @@ class App extends Component {
 
     render() {
         return <div id="drum-machine">
-            <Display sound={this.state.sound} />
-            <div className="controls">
+            <div className="all-controls">
+                <div class="header">
+                    <div class="name-container">
+                        <h1 class="header__name">AKAI</h1>
+                        <p class="header__line">PROFESSIONAL</p>
+                    </div>
+                    <div class="model-container">
+                        <h1 class="header__model">MPD218</h1>
+                    </div>
+                </div>
+                <Display sound={this.state.sound} />
                 <ControlBank />
                 <PadBank
                     setDisplayText={this.setDisplayText}
