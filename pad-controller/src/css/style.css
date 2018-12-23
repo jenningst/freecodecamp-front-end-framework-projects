@@ -1,45 +1,53 @@
+.controls {
+    display: flex;
+    flex-direction: rcolumow;
+    border: yellow solid 1px;
+}
+
 .pad-panel {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    width: 650px;
-    padding: 10px auto 10px auto;
-    background: black;
+    min-width: 428px;
+    max-width: 700px;
+    border: dashed red 1px;
 }
 
-.drum-pad {
-    height: 175px;
-    width: 175px;
-    margin: 1rem;
-    border: solid yellow 1px;
-    color: white;
+.knob-panel {
+    border: dashed blue 1px;
 }
 
-.drum-pad__label {
+.knob-row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 5px;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
 
-.label-item {
-    margin: 0;
+.knob-panel__knob {
+    margin: 2px;
+    border-radius: 50%;
+    height: 20%;
+    width: 20%;
+    margin: 5px auto 5px auto;
+}
+
+.button-panel__button {
     
 }
 
-.label-id {
-    color: white;
+.display {
+    border: 1px solid black;
+    height: 2rem;
 }
 
-.label-alt {
-    padding-left: 2px;
-    padding-right: 2px;
-    background: white;
+.drum-pad {
+    display: flex;
+    margin: .5rem;
+    max-width: 225px;
+    border: 1px solid black;
+    font-size: 200%;
 }
 
-.drum-pad__link {
-    display: block;
-    height: 85%;
-    width: 100%;
-    border: solid red 1px;
+.drum-pad__label {
+    padding: 50px;
 }

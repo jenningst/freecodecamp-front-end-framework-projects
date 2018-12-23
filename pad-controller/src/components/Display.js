@@ -11,14 +11,7 @@ class Display extends Component {
     }
     
     render() {
-        return (
-            <div id="display" className="display" dangerouslySetInnerHTML={this.setDisplay()}>
-            </div>);
-                {/* <div className="display-bank">
-                    <h2>{this.props.sound}</h2>
-                </div>
-                <div className="knob-bank"></div>
-                <div className="button-bank"></div> */}
+        return <div id="display" className="display" dangerouslySetInnerHTML={this.setDisplay()} />
     }
 }
 
