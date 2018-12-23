@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 
 class Pad extends Component {
     audioRef = React.createRef();
-
+    
     handleClick = (key) => {        
-        // this.props.setDisplayText(key);
-        // this.props.playSound(key);
-        this.audioRef.current.play();
+        this.props.setDisplayText(this.props.details.keyBinding);
+        this.props.playSound(this.props.details.keyBinding);
+        //this.audioRef.current.play();
     }
-
+    
     render() {
-        return <button id={this.props.details.clipDesc} className="drum-pad" onClick={this.handleClick}>
-            {this.props.details.keyBinding.toUpperCase()}
+        const { func, source, desc, binding } = this.props.details;
+        return <button id={desc} className="drum-pad" onClick={this.handleClick}>
+            {binding}
             {/* <a className="drum-pad__link" href="#0" onClick={this.playSound}/> */}
-            <audio className="clip" id={this.props.details.keyBinding.toUpperCase()} src={this.props.details.clipSource} ref={this.audioRef} />
+            <audio className="clip" id={binding} src={source} ref={this.audioRef} />
             {/* <div className="drum-pad__label">
               <p className="label-item label-id">
                 PAD {this.props.details.keyBinding}

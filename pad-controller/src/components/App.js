@@ -11,11 +11,13 @@ class App extends Component {
     }
 
     setDisplayText = (key) => {
-        this.setState({ sound: padSamples[`pad${key}`].clipDesc})
+        let keyIndex = key.toUpperCase();
+        this.setState({ sound: padSamples[`pad${keyIndex}`].clipDesc})
     }
 
     playSound = (key) => {
-        this.audio = new Audio(padSamples[`pad${key}`].clipSource)
+        let keyIndex = key.toUpperCase();
+        this.audio = new Audio(padSamples[`pad${keyIndex}`].clipSource)
         this.audio.currentTime = 0;
         this.audio.play();
     }
