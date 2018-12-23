@@ -11,7 +11,7 @@ class Display extends Component {
     }
     
     render() {
-        return <div id="display" className="display" dangerouslySetInnerHTML={this.setDisplay()} />
+        return <div id="display" className="display" dangerouslySetInnerHTML={this.setDisplay()}></div>
     }
 }
 
