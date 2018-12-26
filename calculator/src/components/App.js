@@ -7,6 +7,7 @@ class App extends Component {
     state = {
         formula: '',
         lastCharacter: '',
+        decimalInSubstring: false,
         input: '0'
     }
 
@@ -26,20 +27,23 @@ class App extends Component {
                 this.setState({ formula: '', lastCharacter: val, input: calculation });
                 break;
             default:
-                // clear the initial zero: overwrite 0 state, update formula and lastCharacter
                 const operators = ['+', '-', '*', '/'];
-
+            
+                // clear the initial zero: overwrite 0 state, update formula and lastCharacter
                 if (this.state.input === '0') {
                     this.setState({ formula: val, lastCharacter: val, input: val});
                 } 
                 // prohibit multiple subsequent operators
-                else if (operators.includes(this.state.lastCharacter) && operators.includes(val)) {
-                    // don't add subsequent operators
+                else if (operators.includes(val) && operators.includes(this.state.lastCharacter)) {
+                    // TODO: Need the ability to reset decimalInString state for valid operator input
                 }
                  // default block
                 else {
+                    if (this.state.decimalInSubstring === true && val === '.') {
+                        // don't allow additional decimal
+                    }
                     let currentInput = this.state.input;
-                    console.log(`currentInput = ${currentInput}`);
+                    // console.log(`currentInput = ${currentInput}`);
                     let updatedInput = currentInput.toString().concat(val);
                     this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
                 }
