@@ -33,7 +33,8 @@ class App extends Component {
                 // default
                 else {
                     let currentInput = this.state.input;
-                    let updatedInput = currentInput.concat(val);
+                    console.log(`currentInput = ${currentInput}`);
+                    let updatedInput = currentInput.toString().concat(val);
                     this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
                 }
         }
@@ -52,13 +53,13 @@ class App extends Component {
             <div className="calculator">
                 <div className="display-bank">
                     <div className="display-bank__last">
-                        {this.state.lastCharacter}
+                        <span>Last Character:</span> {this.state.lastCharacter}
                     </div>
                     <div className="display-bank__formula-bar">
-                        {this.state.formula}
+                        <span>Form:</span> {this.state.formula}
                     </div>
                     <div id="display" className="display-bank__output">
-                        {this.state.input}
+                        <span>Input:</span> {this.state.input}
                     </div>
                 </div>
                 <div className="button-bank">
