@@ -1,0 +1,33 @@
+.display-bank {
+  width: 100%;
+  background: whitesmoke;
+  border: 1px solid black;
+}
+.display-bank .display-bank__formula-bar, .display-bank .display-bank__output {
+  border: 1px solid red;
+}
+
+.button-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.button-bank .button-bank__button {
+  flex-basis: 12%;
+}
+
+/********** MQ **********/
+@media (min-width: 600px) {
+  .calculator {
+    width: 400px;
+  }
+}
+@media (min-width: 800px) {
+  .calculator {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
