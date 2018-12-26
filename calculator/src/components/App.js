@@ -6,28 +6,36 @@ class App extends Component {
     
     state = {
         formula: '',
-        input: ''
+        lastCharacter: '',
+        input: '0'
     }
 
     handleClick = (e) => {
         const id = e.currentTarget.id;
-        const val = e.currentTarget.val;
-
-        console.log(`id: ${id}`);
-
+        const val = e.currentTarget.value;
+        
         switch(id) {
+            // clear was clicked; initialize everything
             case('clear'):
-                this.setState({ formula: '', input: '' });
+                this.setState({ formula: '', lastCharacter: '', input: '0' });
                 break;
+            // equals was clicked
             case('equals'):
                 let currentFormula = this.state.formula;
                 let calculation = eval(currentFormula);
-                this.setState({ formula: '', input: calculation });
+                this.setState({ formula: '', lastCharacter: val, input: calculation });
                 break;
             default:
-                let currentInput = this.state.input;
-                let updatedInput = currentInput.concat(e.currentTarget.value);
-                this.setState({ formula: updatedInput, input : updatedInput })  ;
+                // clear the initial zero
+                if (this.state.input === '0') {
+                    this.setState({ formula: val, lastCharacter: val, input: val});
+                } 
+                // default
+                else {
+                    let currentInput = this.state.input;
+                    let updatedInput = currentInput.concat(val);
+                    this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
+                }
         }
     }
 
@@ -43,6 +51,9 @@ class App extends Component {
         return (
             <div className="calculator">
                 <div className="display-bank">
+                    <div className="display-bank__last">
+                        {this.state.lastCharacter}
+                    </div>
                     <div className="display-bank__formula-bar">
                         {this.state.formula}
                     </div>

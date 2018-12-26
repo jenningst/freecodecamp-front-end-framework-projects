@@ -1,11 +1,18 @@
 
+#main {
+    display: flex;
+    justify-content: space-around;
+}
+
 .display-bank {
     width: 100%;
     background: whitesmoke;
     border: 1px solid black;
 
-    .display-bank__formula-bar, .display-bank__output {
+    .display-bank__formula-bar, .display-bank__output, .display-bank__last {
+        height: 2em;
         border: 1px solid red;
+        text-align: right;
     }
 }
 
