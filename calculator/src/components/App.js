@@ -15,22 +15,28 @@ class App extends Component {
         const val = e.currentTarget.value;
         
         switch(id) {
-            // clear was clicked; initialize everything
+            // clear was clicked: initialize everything
             case('clear'):
                 this.setState({ formula: '', lastCharacter: '', input: '0' });
                 break;
-            // equals was clicked
+            // equals was clicked: reinitialize formula, update input, update lastCharacter
             case('equals'):
                 let currentFormula = this.state.formula;
                 let calculation = eval(currentFormula);
                 this.setState({ formula: '', lastCharacter: val, input: calculation });
                 break;
             default:
-                // clear the initial zero
+                // clear the initial zero: overwrite 0 state, update formula and lastCharacter
+                const operators = ['+', '-', '*', '/'];
+
                 if (this.state.input === '0') {
                     this.setState({ formula: val, lastCharacter: val, input: val});
                 } 
-                // default
+                // prohibit multiple subsequent operators
+                else if (operators.includes(this.state.lastCharacter) && operators.includes(val)) {
+                    // don't add subsequent operators
+                }
+                 // default block
                 else {
                     let currentInput = this.state.input;
                     console.log(`currentInput = ${currentInput}`);
