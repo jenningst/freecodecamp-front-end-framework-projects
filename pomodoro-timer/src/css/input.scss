@@ -1,0 +1,30 @@
+$primary-background: #262256;
+$light-background: #9291aa;
+$primary-highlight: #feaa8b;
+$primary-text: white;
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.timer {
+    background: $primary-background;
+    color: white;
+    
+}
+
+/********** MEDIA QUERIES **********/
+
+@media (min-width: 600px) {
+    .timer {
+        width: 400px;
+    }
+}
+
+@media (min-width: 800px) {
+    .timer {
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
