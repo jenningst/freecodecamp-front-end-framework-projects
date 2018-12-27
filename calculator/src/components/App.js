@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { buttons } from '../button-data';
+var safeEval = require('safe-eval');
 
 class App extends Component {
-    
+
     state = {
         formula: '',
         lastCharacter: '',
@@ -12,50 +12,59 @@ class App extends Component {
     }
 
     handleClick = (e) => {
+        // debugger;
         const id = e.currentTarget.id;
         const val = e.currentTarget.value;
+        // console.log(`id: ${id}`);
+        // console.log(`val: ${val}`);
         
         switch(id) {
-            // clear was clicked: initialize everything
             case('clear'):
-                this.setState({ formula: '', lastCharacter: '', input: '0' });
+                // clear was clicked: initialize everything
+                this.setState({ formula: '', lastCharacter: '', decimalInSubstring: false, input: '0' });
                 break;
-            // equals was clicked: reinitialize formula, update input, update lastCharacter
             case('equals'):
+            // equals was clicked: reinitialize formula, update input, update lastCharacter
                 let currentFormula = this.state.formula;
-                let calculation = eval(currentFormula);
+                let calculation = safeEval(currentFormula);
                 this.setState({ formula: '', lastCharacter: val, input: calculation });
                 break;
             default:
                 const operators = ['+', '-', '*', '/'];
             
-                // clear the initial zero: overwrite 0 state, update formula and lastCharacter
+                // calculator is initialized; overwrite state
                 if (this.state.input === '0') {
+                    // clear the initial zero: overwrite 0 state, update formula and lastCharacter
                     this.setState({ formula: val, lastCharacter: val, input: val});
-                } 
-                // prohibit multiple subsequent operators
-                else if (operators.includes(val) && operators.includes(this.state.lastCharacter)) {
-                    // TODO: Need the ability to reset decimalInString state for valid operator input
+                    break;
                 }
-                 // default block
-                else {
-                    if (this.state.decimalInSubstring === true && val === '.') {
-                        // don't allow additional decimal
+
+                // case for operator
+                if (operators.includes(val)) {
+                    if (operators.includes(this.state.lastCharacter)) {
+                        // prohibit subsequent operator
+                        break;
+                    } else {
+                        // reset state because user is inputting a new number
+                        this.setState({ decimalInSubstring: false });
                     }
-                    let currentInput = this.state.input;
-                    // console.log(`currentInput = ${currentInput}`);
-                    let updatedInput = currentInput.toString().concat(val);
-                    this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
                 }
+
+                // case for decimal
+                if (val === '.') {
+                    if (this.state.decimalInSubstring === true) {
+                        // prohibit additional decimal in the same number
+                        break;
+                    } else {
+                        this.setState({ decimalInSubstring: true });
+                    }
+                }
+
+                 // default catch all
+                let currentInput = this.state.input;
+                let updatedInput = currentInput.toString().concat(val);
+                this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
         }
-    }
-
-    componentWillMount() {
-        window.addEventListener('click', this.handleClick);
-    }
-
-    componentWillMount() {
-        window.removeEventListener('click', this.handleClick);
     }
 
     render() {
@@ -63,13 +72,13 @@ class App extends Component {
             <div className="calculator">
                 <div className="display-bank">
                     <div className="display-bank__last">
-                        <span>Last Character:</span> {this.state.lastCharacter}
+                        {this.state.lastCharacter}
                     </div>
                     <div className="display-bank__formula-bar">
-                        <span>Form:</span> {this.state.formula}
+                        {this.state.formula}
                     </div>
                     <div id="display" className="display-bank__output">
-                        <span>Input:</span> {this.state.input}
+                        {this.state.input}
                     </div>
                 </div>
                 <div className="button-bank">
@@ -88,9 +97,5 @@ class App extends Component {
         );
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
