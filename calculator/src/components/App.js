@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { buttons } from '../button-data';
+var safeEval = require('safe-eval');
 
 class App extends Component {
-    
+
     state = {
         formula: '',
         lastCharacter: '',
@@ -11,9 +12,11 @@ class App extends Component {
     }
 
     handleClick = (e) => {
+        // debugger;
         const id = e.currentTarget.id;
         const val = e.currentTarget.value;
-        let currentInput = this.state.input;
+        // console.log(`id: ${id}`);
+        // console.log(`val: ${val}`);
         
         switch(id) {
             case('clear'):
@@ -23,7 +26,7 @@ class App extends Component {
             case('equals'):
             // equals was clicked: reinitialize formula, update input, update lastCharacter
                 let currentFormula = this.state.formula;
-                let calculation = currentFormula;
+                let calculation = safeEval(currentFormula);
                 this.setState({ formula: '', lastCharacter: val, input: calculation });
                 break;
             default:
@@ -58,23 +61,19 @@ class App extends Component {
                 }
 
                  // default catch all
+                let currentInput = this.state.input;
                 let updatedInput = currentInput.toString().concat(val);
                 this.setState({ formula: updatedInput, lastCharacter: val, input: updatedInput });
         }
-    }
-
-    componentWillMount() {
-        window.addEventListener('click', this.handleClick);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('click', this.handleClick);
     }
 
     render() {
         return (
             <div className="calculator">
                 <div className="display-bank">
+                    <div className="display-bank__last">
+                        {this.state.lastCharacter}
+                    </div>
                     <div className="display-bank__formula-bar">
                         {this.state.formula}
                     </div>
