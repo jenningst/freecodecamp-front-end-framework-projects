@@ -69,6 +69,6 @@ export const buttons = [
     },
     {
         id: 'clear',
-        value: 'AC'
+        value: 'ac'
     },
 ]
