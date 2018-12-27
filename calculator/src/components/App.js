@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { buttons } from '../button-data';
 var safeEval = require('safe-eval');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class App extends Component {
 
@@ -79,16 +80,16 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="button-bank">
-                    {buttons.map(item => 
-                        <button 
-                            id={item.id}
-                            key={item.id}
-                            value={item.value}
-                            className="button-bank__button"
-                            onClick={this.handleClick}
-                        >
-                            {item.value}
-                        </button>)}
+                        {buttons.map(item => 
+                            <button 
+                                id={item.id}
+                                key={item.id}
+                                value={item.value}
+                                className="button-bank__button"
+                                onClick={this.handleClick}
+                            >
+                                {item.value}
+                            </button>)}
                 </div>
             </div>
         );

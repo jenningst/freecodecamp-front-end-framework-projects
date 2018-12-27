@@ -42,8 +42,8 @@ body {
 .button-bank #clear {
   grid-column: 1/5;
   grid-row: 1/2;
-  background: #3c4559;
-  color: white;
+  background: #71EEB8;
+  color: #3c4559;
 }
 .button-bank #divide {
   grid-column: 4/5;
