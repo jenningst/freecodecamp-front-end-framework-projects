@@ -1,42 +1,105 @@
+$primary-blue: #6e8aeb;
+$medium-blue: #474e64;
+$dark-blue: #3c4559;
+$primary-grey: #bcc2d1;
+$primary-white: white;
+$font-stack: Source Code Pro, sans-serif;
 
-#main {
-    display: flex;
-    justify-content: space-around;
+body {
+    font-family: $font-stack;
+}
+
+.calculator {
+    margin: 100px 0 auto 0;
+    height: 500px;
 }
 
 .display-bank {
-    width: 90%;
-    background: whitesmoke;
-    border: 1px solid black;
-
-    .display-bank__formula-bar, .display-bank__output, .display-bank__last {
-        height: 2em;
-        border: 1px solid red;
-        text-align: right;
+    display: flex;
+    flex-direction: column;
+    background: $primary-white;
+    text-align: right;
+    
+    .display-bank__output {  
+        font-size: 3rem;
+        padding-right: .5rem;
     }
-
-    .span {
-        color: gray;
+    
+    .display-bank__formula-bar {
+        height: 1.5rem;
+        padding-right: 12px;
+        color: $primary-grey;
+    }
+    .display-bank__formula-bar, .display-bank__output {
+        flex-basis: 100%;
+        
     }
 }
 
 .button-bank {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    height: 80%;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(5, 20%);
+    justify-items: stretch;
 
     .button-bank__button {
-        flex-basis: 12%;
+        background: $medium-blue;
+        border: none;
+        color: white;
+        font-size: 2rem;
+    }
+
+    #clear {
+        grid-column: 1 / 5;
+        grid-row: 1 / 2;
+        background: $dark-blue;
+        color: white;
+    }
+
+    #divide {
+        grid-column: 4 / 5;
+        grid-row: 2 / 3;
+        background: $primary-blue;
+        color: white;
+    }
+
+    #multiply {
+        grid-column: 4 / 5;
+        grid-row: 3 / 4;
+        background: $primary-blue;
+        color: white;
+    }
+
+    #subtract {
+        grid-column: 4 / 5;
+        grid-row: 4 / 5;
+        background: $primary-blue;
+        color: white;
+    }
+
+    #add {
+        grid-column: 4 / 5;
+        grid-row: 5 / 6;
+        background: $primary-blue;
+        color: white;
+    }
+
+    #equals {
+        grid-column: 1 / 2;
+        grid-row: 5 / 6;
+        background: $primary-blue;
+        color: white;
     }
 }
 
 /********** MQ **********/
 
-@media (min-width: 600px) {
-    .calculator {
-        width: 400px;
-    }
-}
+// @media (min-width: 600px) {
+//     .calculator {
+//         width: 400px;
+//     }
+// }
 
 @media (min-width: 800px) {
     .calculator {

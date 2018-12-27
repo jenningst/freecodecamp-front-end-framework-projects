@@ -1,37 +1,82 @@
-#main {
-  display: flex;
-  justify-content: space-around;
+body {
+  font-family: Source Code Pro, sans-serif;
+}
+
+.calculator {
+  margin: 100px 0 auto 0;
+  height: 500px;
 }
 
 .display-bank {
-  width: 100%;
-  background: whitesmoke;
-  border: 1px solid black;
-}
-.display-bank .display-bank__formula-bar, .display-bank .display-bank__output, .display-bank .display-bank__last {
-  height: 2em;
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  background: white;
   text-align: right;
 }
-.display-bank .span {
-  color: gray;
+.display-bank .display-bank__output {
+  font-size: 3rem;
+  padding-right: 0.5rem;
+}
+.display-bank .display-bank__formula-bar {
+  height: 1.5rem;
+  padding-right: 12px;
+  color: #bcc2d1;
+}
+.display-bank .display-bank__formula-bar, .display-bank .display-bank__output {
+  flex-basis: 100%;
 }
 
 .button-bank {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  height: 80%;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(5, 20%);
+  justify-items: stretch;
 }
 .button-bank .button-bank__button {
-  flex-basis: 12%;
+  background: #474e64;
+  border: none;
+  color: white;
+  font-size: 2rem;
+}
+.button-bank #clear {
+  grid-column: 1/5;
+  grid-row: 1/2;
+  background: #3c4559;
+  color: white;
+}
+.button-bank #divide {
+  grid-column: 4/5;
+  grid-row: 2/3;
+  background: #6e8aeb;
+  color: white;
+}
+.button-bank #multiply {
+  grid-column: 4/5;
+  grid-row: 3/4;
+  background: #6e8aeb;
+  color: white;
+}
+.button-bank #subtract {
+  grid-column: 4/5;
+  grid-row: 4/5;
+  background: #6e8aeb;
+  color: white;
+}
+.button-bank #add {
+  grid-column: 4/5;
+  grid-row: 5/6;
+  background: #6e8aeb;
+  color: white;
+}
+.button-bank #equals {
+  grid-column: 1/2;
+  grid-row: 5/6;
+  background: #6e8aeb;
+  color: white;
 }
 
 /********** MQ **********/
-@media (min-width: 600px) {
-  .calculator {
-    width: 400px;
-  }
-}
 @media (min-width: 800px) {
   .calculator {
     width: 800px;

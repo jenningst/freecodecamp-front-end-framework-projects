@@ -5,7 +5,7 @@ var safeEval = require('safe-eval');
 class App extends Component {
 
     state = {
-        formula: '',
+        formula: '0',
         lastCharacter: '',
         decimalInSubstring: false,
         input: '0'
@@ -71,9 +71,6 @@ class App extends Component {
         return (
             <div className="calculator">
                 <div className="display-bank">
-                    <div className="display-bank__last">
-                        {this.state.lastCharacter}
-                    </div>
                     <div className="display-bank__formula-bar">
                         {this.state.formula}
                     </div>
@@ -87,7 +84,7 @@ class App extends Component {
                             id={item.id}
                             key={item.id}
                             value={item.value}
-                            className="button-bank__button btn btn-primary"
+                            className="button-bank__button"
                             onClick={this.handleClick}
                         >
                             {item.value}
