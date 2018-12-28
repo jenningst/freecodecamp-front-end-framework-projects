@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 class App extends Component {
     state = {
-        break: 30000,
-        session: 150000,
-        remainingTime: 150000,
+        break: 1000,
+        session: 1000,
+        remainingTime: 1000,
         pause: false,
         toggleSession: true,
         toggleStart: true,
@@ -17,11 +17,12 @@ class App extends Component {
         const stateTarget = e.currentTarget.id.split('-')[0];
         const incrementer = e.currentTarget.id.split('-')[1];
         let currentLength = this.state[stateTarget];
-        const newLength = () => incrementer === 'increment' ? currentLength + 60 : currentLength - 60;
-        
-        if (currentLength >= 60 && currentLength <= 3540) {
+        const newLength = () => incrementer === 'increment' ? currentLength + 1000 : currentLength - 1000;
+
+        if (newLength() >= 0 && newLength() <= 3599000) {
             this.setState({ [stateTarget] : newLength() });
         }
+        // TODO: this must also update remainingTime
     }
 
     handleStartStop = (e) => {
