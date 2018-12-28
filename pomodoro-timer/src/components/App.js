@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { formatTime, calculate } from '../helpers';
+import Timer from './Timer';
+import { formatDuration } from '../helpers';
 import PropTypes from 'prop-types';
 
 class App extends Component {
     state = {
-        break: 1000,
-        session: 1000,
-        remainingTime: 1000,
+        break: 2000,
+        session: 2000,
+        remainingTime: 10000,
         pause: false,
         toggleSession: true,
         toggleStart: true,
@@ -36,6 +37,10 @@ class App extends Component {
                 this.setState({ remainingTime: this.state.remainingTime-1000})
             }, 1000);
             this.setState({ timerId });
+
+            if (this.state.remainingTime === 0){
+                console.log('done!');
+            }
         } else {
             clearInterval(this.state.timerId);
         }
@@ -47,9 +52,9 @@ class App extends Component {
 
     handleReset = (e) => {
         this.setState({
-            break: 30000,
-            session: 150000,
-            remainingTime: 150000,
+            break: 2000,
+            session: 2000,
+            remainingTime: 2000,
             pause: false,
             toggleSession: true,
             toggleStart: true
@@ -78,14 +83,13 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="timer-counter">
-                    <p id="timer-label">{this.state.toggleSession ? 'Session' : 'Break'}</p>
-                    <div id="time-left">{this.state.remainingTime} <div/>
-                </div>
+                <Timer 
+                    toggleSession={this.state.toggleSession}
+                    remainingTime={this.state.remainingTime}
+                />
                 <div className="timer-buttons">
                     <button id="start_stop" onClick={this.handleStartStop}>{this.state.toggleStart ? 'Start' : 'Stop'}</button>
                     <button id="reset" onClick={this.handleReset}>Reset</button>
-                </div>
                 </div>
             </div>
         );
