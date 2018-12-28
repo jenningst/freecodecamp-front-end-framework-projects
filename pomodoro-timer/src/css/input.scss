@@ -10,7 +10,11 @@ body {
 .timer {
     background: $primary-background;
     color: white;
-    
+    padding: 30px;
+}
+
+#time-left {
+    font-size: 6rem;
 }
 
 /********** MEDIA QUERIES **********/

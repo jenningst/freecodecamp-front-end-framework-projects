@@ -5,6 +5,11 @@ body {
 .timer {
   background: #262256;
   color: white;
+  padding: 30px;
+}
+
+#time-left {
+  font-size: 6rem;
 }
 
 /********** MEDIA QUERIES **********/
