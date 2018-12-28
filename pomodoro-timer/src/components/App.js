@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { formatTime } from '../helpers';
+import { formatTime, calculate } from '../helpers';
 import PropTypes from 'prop-types';
 
 class App extends Component {
     state = {
-        break: 300,
-        session: 1500,
-        remainingTime: 0,
+        break: 30000,
+        session: 150000,
+        remainingTime: 150000,
         pause: false,
         toggleSession: true,
-        toggleStart: true
+        toggleStart: true,
+        timerId: ''
     }
 
     handleIncrement = (e) => {
@@ -23,11 +24,31 @@ class App extends Component {
         }
     }
 
+    handleStartStop = (e) => {
+        // switch our state
+        this.setState({ toggleStart: !this.state.toggleStart });
+
+        let timerId;
+        const sessionOrBreak = this.state.toggleSession ? 'session' : 'break';
+        if (this.state.toggleStart) {
+            timerId = setInterval(() => {
+                this.setState({ remainingTime: this.state.remainingTime-1000})
+            }, 1000);
+            this.setState({ timerId });
+        } else {
+            clearInterval(this.state.timerId);
+        }
+    }
+
+    handleSessionOrBreak = (e) => {
+        this.setState({ toggleSession: !this.state.toggleSession });
+    }
+
     handleReset = (e) => {
         this.setState({
-            break: 300,
-            session: 1500,
-            remainingTime: 0,
+            break: 30000,
+            session: 150000,
+            remainingTime: 150000,
             pause: false,
             toggleSession: true,
             toggleStart: true
@@ -43,7 +64,7 @@ class App extends Component {
                         <p id="break-label">Break Length</p>
                         <div className="breakrementer">
                             <button id="break-decrement" onClick={this.handleIncrement}>-</button>
-                            <div id="break-length">{formatTime(this.state.break)}</div>
+                            <div id="break-length">{this.state.break}</div>
                             <button id="break-increment" onClick={this.handleIncrement}>+</button>
                         </div>
                     </div>
@@ -51,17 +72,17 @@ class App extends Component {
                         <p id="session-label">Session Length</p>
                         <div className="sessionrementer">
                             <button id="session-decrement" onClick={this.handleIncrement}>-</button>
-                            <div id="session-length">{formatTime(this.state.session)}</div>
+                            <div id="session-length">{this.state.session}</div>
                             <button id="session-increment" onClick={this.handleIncrement}>+</button>
                         </div>
                     </div>
                 </div>
                 <div className="timer-counter">
                     <p id="timer-label">{this.state.toggleSession ? 'Session' : 'Break'}</p>
-                    <div id="time-left">{} <div/>
+                    <div id="time-left">{this.state.remainingTime} <div/>
                 </div>
                 <div className="timer-buttons">
-                    <button id="start_stop">{this.state.toggleStart ? 'Start' : 'Stop'}</button>
+                    <button id="start_stop" onClick={this.handleStartStop}>{this.state.toggleStart ? 'Start' : 'Stop'}</button>
                     <button id="reset" onClick={this.handleReset}>Reset</button>
                 </div>
                 </div>
