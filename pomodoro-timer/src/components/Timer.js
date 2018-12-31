@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { formatCountdownDisplay } from '../helpers';
+import { formatCounter } from '../helpers';
 
 class Timer extends Component {
     static propTypes = {
         toggleSession: PropTypes.bool,
-        remainingTime: PropTypes.number
+        toggleStart: PropTypes.bool,
+        minutes: PropTypes.number,
+        seconds: PropTypes.number
     }
     
     render() {
+        const minutes = this.props.minutes;
+        const seconds = this.props.seconds;
         return (
             <div className="timer-counter">
-                <p id="timer-label">{this.props.toggleSession ? 'Session' : 'Break'}</p>
-                <div id="time-left">{formatCountdownDisplay(this.props.remainingTime)}</div>
+                <div className="timer-display">
+                    <p id="timer-label">{this.props.toggleSession ? 'Session' : 'Break'}</p>
+                    <div id="time-left">{`${formatCounter(minutes)} m ${formatCounter(seconds)} s`}</div>
+                </div>
             </div>
         );
     }
