@@ -1,22 +1,14 @@
 /** Any helper functions needed for this project **/
 
-export function sessionTimer(prevState, props) {
-    // start the timer
-    let timer = setInterval(() => {
-        this.setState((prevState) => ({ 
-            remainingTime: prevState.remainingTime - 1000 
-        }));
-    }, 1000);
-    // update state with the timer id
-    this.setState((prevState) => ({
-        sessionTimerId: prevState = timer
-    }));
-}
-
-export function formatDuration(milliseconds) {
-    return milliseconds / 60 / 1000;
-}
-
-export function formatCounter(time){
+export function padTime(time){
     return time < 10 ? '0' + time : time;
+}
+
+export function msToMinutesSeconds(ms) {
+    let min, sec;
+    let remaining = ms;
+    min = parseInt(remaining / 1000 / 60);
+    remaining = (remaining / 1000 % 60);
+    sec = parseInt(remaining);
+    return { minutes: min, seconds: sec };
 }

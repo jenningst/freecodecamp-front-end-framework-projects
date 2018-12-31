@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { formatCounter } from '../helpers';
+import { padTime } from '../helpers';
 
 class Timer extends Component {
     static propTypes = {
@@ -17,15 +17,11 @@ class Timer extends Component {
             <div className="timer-counter">
                 <div className="timer-display">
                     <p id="timer-label">{this.props.toggleSession ? 'Session' : 'Break'}</p>
-                    <div id="time-left">{`${formatCounter(minutes)} m ${formatCounter(seconds)} s`}</div>
+                    <div id="time-left">{`${padTime(minutes)} m ${padTime(seconds)} s`}</div>
                 </div>
             </div>
         );
     }
 }
-
-Timer.propTypes = {
-
-};
 
 export default Timer;

@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import Timer from './Timer';
-import { sessionTimer } from '../helpers';
-import PropTypes from 'prop-types';
+import { msToMinutesSeconds } from '../helpers';
 
 class App extends Component {
     state = {
-        seconds: 0,
-        minutes: 25,
-        break: 5,
-        session: 25,
+        seconds: 5,
+        minutes: 0,
+        break: 1,
+        session: 2,
         toggleSession: true,
         toggleStart: true,
         timerId: ''
+    }
+
+    handleReset = (e) => {
+        // stop the current timer
+        clearInterval(this.state.timerId); // TODO: Broken
+
+        this.setState({
+            seconds: 5,
+            minutes: 0,
+            break: 1,
+            session: 2,
+            toggleSession: true,
+            toggleStart: true,
+            timerId: ''
+        })
     }
 
     handleIncrement = (e) => {
@@ -33,31 +47,15 @@ class App extends Component {
         }
     }
 
-    handleReset = (e) => {
-        // stop the current timer
-        clearInterval(this.state.timerId); // TODO: Broken
-
-        this.setState({
-            seconds: 0,
-            minutes: 25,
-            break: 5,
-            session: 25,
-            toggleSession: true,
-            toggleStart: true,
-            timerId: ''
-        })
-    }
-
     handleStartStop = (e) => {
         const startOrStop = this.state.toggleStart;
-        if (startOrStop) { // session
+        const sessionOrBreak = this.state.toggleSession;
+        if (startOrStop) {
             // toggle to stop
             this.setState({ toggleStart: !this.state.toggleStart });
-            // create a timer to run our tick() function
-            let timer = setInterval(this.tick, 1000);
-            // update state to get the current timer id
-            this.setState( { timerId: timer });
-        } else { // break
+            // execute our tick() method
+            this.tick(sessionOrBreak);
+        } else {
             // stop the current timer
             clearInterval(this.state.timerId);
             // toggle to start
@@ -65,10 +63,47 @@ class App extends Component {
         }
     }
 
-    tick = () => {
-        // initial run:
-            // get our session and break lengths
-            // get the current time
+    resetSessionOrBreak = (sessionOrBreak) => {
+        return sessionOrBreak === 'session' ? this.state.session : this.state.break;
+    }
+
+    tick = (sessionOrBreak) => {
+        // get our current time
+        let remainingMinutes = this.state.minutes;
+        let remainingSeconds = this.state.seconds;
+        // setup counters
+        let remainingMilliseconds = (remainingMinutes * 60 * 1000) + (remainingSeconds * 1000) - 1000; // take off 1000 to avoid a delay
+        let counter = 0;
+        
+        // run the timer
+        let timer = setInterval(() => {
+            // set our timer id
+            this.setState({ timerId: timer });
+            // update state with the remaining minutes and sexonds
+            let { minutes: min, seconds: sec } = msToMinutesSeconds(remainingMilliseconds);
+            this.setState((state, props) => ({
+                minutes: state.minutes = min,
+                seconds: state.seconds = sec
+            }));
+            // increment and decrement our counters
+            remainingMilliseconds -= 1000;
+            counter += 1000;
+
+            if (remainingMilliseconds < 0) {
+                // current session or break has expired; switch to the other
+                this.setState({ toggleSession: !this.state.toggleSession});
+                let next = this.state.toggleSession ? 'session' : 'break';
+                // reset the minutes in state for the next timer
+                this.setState({
+                    minutes: this.state[next],
+                })
+                // stop and clear the current timer from state
+                clearInterval(this.state.timerId);
+                this.setState({ timerId: '' });
+                // start a new timer
+                this.tick(next);
+            }
+        }, 1000);
     }
 
     render() {
@@ -104,9 +139,5 @@ class App extends Component {
         );
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
