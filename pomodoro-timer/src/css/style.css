@@ -1,28 +1,77 @@
 body {
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .timer {
+  width: 400px;
+  padding: 20px;
   background: #262256;
   color: white;
-  padding: 30px;
+  border-radius: 5%;
+}
+
+.controls {
+  display: flex;
+  justify-content: stretch;
+}
+.controls #break-label, .controls #session-label {
+  font-size: 0.5rem;
+}
+.controls .controls__bank {
+  flex-basis: 100%;
+  text-align: center;
+}
+.controls .control-length {
+  display: inline;
+  font-size: 2rem;
+  padding: 0 5px 0 5px;
+}
+.controls button {
+  display: inline;
+  background: #262256;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.timer-counter {
+  padding: 25px 0px 25px 0px;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+.timer-controls button {
+  background: #feaa8b;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+}
+
+#timer-label {
+  color: #feaa8b;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 #time-left {
-  font-size: 6rem;
+  font-size: 4rem;
+  text-align: center;
 }
 
 /********** MEDIA QUERIES **********/
 @media (min-width: 600px) {
   .timer {
     width: 400px;
-  }
-}
-@media (min-width: 800px) {
-  .timer {
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
