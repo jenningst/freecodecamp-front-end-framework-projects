@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Timer from './Timer';
-import { sessionTimer } from '../helpers';
-import PropTypes from 'prop-types';
+import { msToMinutesSeconds, padTime } from '../helpers';
 
 class App extends Component {
     state = {
@@ -10,8 +9,27 @@ class App extends Component {
         break: 5,
         session: 25,
         toggleSession: true,
-        toggleStart: true,
-        timerId: ''
+        toggleStart: false,
+        timerId: '',
+        sound:  './samples/foghorn-daniel_simon.mp3'
+    }
+
+    handleReset = (e) => {
+        // stop the current timer
+        clearInterval(this.state.timerId);
+
+        const audio = document.getElementById('beep');
+        audio.currentTime = 0;
+
+        this.setState({
+            seconds: 0,
+            minutes: 25,
+            break: 5,
+            session: 25,
+            toggleSession: true,
+            toggleStart: false,
+            timerId: '',
+        })
     }
 
     handleIncrement = (e) => {
@@ -21,7 +39,7 @@ class App extends Component {
         
         const newLength = () => incrementer === 'increment' ? currentLength + 1 : currentLength - 1;
 
-        if (newLength() >= 0 && newLength() <= 3599000) {
+        if (newLength() >= 1 && newLength() <= 60) {
             // update our length states
             this.setState((prevState) => ({
                 [sessionOrBreak]: prevState[sessionOrBreak] = newLength()
@@ -33,42 +51,46 @@ class App extends Component {
         }
     }
 
-    handleReset = (e) => {
-        // stop the current timer
-        clearInterval(this.state.timerId); // TODO: Broken
-
-        this.setState({
-            seconds: 0,
-            minutes: 25,
-            break: 5,
-            session: 25,
-            toggleSession: true,
-            toggleStart: true,
-            timerId: ''
-        })
-    }
-
-    handleStartStop = (e) => {
-        const startOrStop = this.state.toggleStart;
-        if (startOrStop) { // session
-            // toggle to stop
-            this.setState({ toggleStart: !this.state.toggleStart });
-            // create a timer to run our tick() function
-            let timer = setInterval(this.tick, 1000);
-            // update state to get the current timer id
-            this.setState( { timerId: timer });
-        } else { // break
-            // stop the current timer
-            clearInterval(this.state.timerId);
-            // toggle to start
-            this.setState({ toggleStart: !this.state.toggleStart });
+    toggleTimer = () => {
+        if(!this.state.toggleStart) {
+            this.setState({
+                toggleStart: true,
+                timerId: setInterval(this.tick, 1000)
+            });
+        } else {
+            this.setState({
+                toggleStart: false,
+                timerId: clearInterval(this.state.timerId)
+            });
         }
     }
 
     tick = () => {
-        // initial run:
-            // get our session and break lengths
-            // get the current time
+        let remainingMinutes = this.state.minutes;
+        let remainingSeconds = this.state.seconds;
+        // setup counters
+        let remainingMilliseconds = (remainingMinutes * 60 * 1000) + (remainingSeconds * 1000) - 1000; // take off 1000 to avoid a delay
+        
+        if(this.state.minutes === 0 && this.state.seconds === 0){
+            // play an alert sound
+            const audio = document.getElementById('beep');
+            audio.play();
+            // toggle session/break
+            this.setState({ toggleSession: !this.state.toggleSession });
+            // reset minutes and seconds
+            let next = this.state.toggleSession ? 'session' : 'break';
+            // re-initialize the minutes in state for the next timer
+            this.setState({
+                minutes: this.state[next],
+            })
+        } else {
+            // decrement our time and update state
+            let { minutes: min, seconds: sec } = msToMinutesSeconds(remainingMilliseconds);
+            this.setState((state, props) => ({
+                minutes: state.minutes = min,
+                seconds: state.seconds = sec
+            }));
+        }
     }
 
     render() {
@@ -93,20 +115,17 @@ class App extends Component {
                 <Timer 
                     toggleSession={this.state.toggleSession}
                     toggleStart={this.state.toggleStart}
-                    minutes={this.state.minutes}
-                    seconds={this.state.seconds}
+                    minutes={padTime(this.state.minutes)}
+                    seconds={padTime(this.state.seconds)}
                 />
                 <div className="timer-controls">
-                    <button id="start_stop" onClick={this.handleStartStop}>{this.state.toggleStart ? 'Start' : 'Stop'}</button>
+                    <button id="start_stop" onClick={this.toggleTimer}>{this.state.toggleStart ? 'Stop' : 'Start'}</button>
                     <button id="reset" onClick={this.handleReset}>Reset</button>
                 </div>
+                <audio id="beep" src={this.state.sound}/>
             </div>
         );
     }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
