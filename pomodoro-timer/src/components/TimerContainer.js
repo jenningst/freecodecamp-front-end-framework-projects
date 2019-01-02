@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Timer from './Timer';
+import Counter from './Counter';
 import { msToMinutesSeconds, padTime } from '../helpers';
+import { number } from 'prop-types';
 
-class App extends Component {
+class TimerContainer extends Component {
     state = {
-        seconds: 0,
-        minutes: 25,
+        seconds: 5,
+        minutes: 0,
         break: 5,
         session: 25,
         toggleSession: true,
@@ -14,11 +15,20 @@ class App extends Component {
         sound:  './samples/foghorn-daniel_simon.mp3'
     }
 
+    static propTypes = {
+        incrementer: number
+    }
+
+    static defaultProps = {
+        incrementer: 1000
+    }
+
     handleReset = (e) => {
         // stop the current timer
         clearInterval(this.state.timerId);
 
         const audio = document.getElementById('beep');
+        audio.pause();
         audio.currentTime = 0;
 
         this.setState({
@@ -41,27 +51,28 @@ class App extends Component {
 
         if (newLength() >= 1 && newLength() <= 60) {
             // update our length states
-            this.setState((prevState) => ({
+            this.setState((prevState, props) => ({
                 [sessionOrBreak]: prevState[sessionOrBreak] = newLength()
             }));
             // update our countdown state to reflect the updated session
             if (sessionOrBreak === 'session') {            
-                this.setState({ minutes: newLength() });
+                // this.setState({ minutes: newLength() });
+                this.setState((prevState, props) => ({ minutes: newLength() })); // refactored setState
             }
         }
     }
 
     toggleTimer = () => {
         if(!this.state.toggleStart) {
-            this.setState({
-                toggleStart: true,
+            this.setState((prevState, props) => ({
+                toggleStart: !prevState.toggleStart,
                 timerId: setInterval(this.tick, 1000)
-            });
+            }));
         } else {
-            this.setState({
-                toggleStart: false,
-                timerId: clearInterval(this.state.timerId)
-            });
+            this.setState((prevState, props) => ({
+                toggleStart: !prevState.toggleStart,
+                timerId: clearInterval(prevState.timerId)
+            }));
         }
     }
 
@@ -74,47 +85,50 @@ class App extends Component {
         if(this.state.minutes === 0 && this.state.seconds === 0){
             // play an alert sound
             const audio = document.getElementById('beep');
+            audio.pause();
+            audio.currentTime = 0;
             audio.play();
             // toggle session/break
-            this.setState({ toggleSession: !this.state.toggleSession });
-            // reset minutes and seconds
+            // this.setState({ toggleSession: !this.state.toggleSession });
+            this.setState((prevState, props) => ({ toggleSession: !prevState.toggleSession})); // refactored setState
+            // get the next timer type: break or session
             let next = this.state.toggleSession ? 'session' : 'break';
             // re-initialize the minutes in state for the next timer
-            this.setState({
-                minutes: this.state[next],
-            })
+            // this.setState({ minutes: this.state[next] })
+            this.setState((prevState, props) => ({ minutes: prevState[next] })); // refactored setState
         } else {
             // decrement our time and update state
             let { minutes: min, seconds: sec } = msToMinutesSeconds(remainingMilliseconds);
-            this.setState((state, props) => ({
-                minutes: state.minutes = min,
-                seconds: state.seconds = sec
-            }));
+            this.setState((prevState, props) => ({
+                minutes: prevState.minutes = min,
+                seconds: prevState.seconds = sec
+            })); // refactored; eliminated props
         }
     }
 
     render() {
         return (
             <div className="timer">
-                <div className="break-controls">
-                    <p id="break-label">Break Length</p>
-                    <div className="breakrementer">
-                        <button id="break-decrement" onClick={this.handleIncrement}>-</button>
-                        <div id="break-length">{this.state.break}</div>
-                        <button id="break-increment" onClick={this.handleIncrement}>+</button>
+                <div className="controls">
+                    <div className="break-controls controls__bank">
+                        <p id="break-label">Break Length</p>
+                        <div className="increment-decrement breakrementer">
+                            <button id="break-decrement" className="decrement" onClick={this.handleIncrement}>-</button>
+                            <div id="break-length" className="control-length">{this.state.break}</div>
+                            <button id="break-increment" className="increment" onClick={this.handleIncrement}>+</button>
+                        </div>
                     </div>
-                    <div className="session-controls">
+                    <div className="session-controls controls__bank">
                         <p id="session-label">Session Length</p>
-                        <div className="sessionrementer">
-                            <button id="session-decrement" onClick={this.handleIncrement}>-</button>
-                            <div id="session-length">{this.state.session}</div>
-                            <button id="session-increment" onClick={this.handleIncrement}>+</button>
+                        <div className="increment-decrement sessionrementer">
+                            <button id="session-decrement" className="decrement" onClick={this.handleIncrement}>-</button>
+                            <div id="session-length" className="control-length">{this.state.session}</div>
+                            <button id="session-increment" className="increment" onClick={this.handleIncrement}>+</button>
                         </div>
                     </div>
                 </div>
-                <Timer 
+                <Counter 
                     toggleSession={this.state.toggleSession}
-                    toggleStart={this.state.toggleStart}
                     minutes={padTime(this.state.minutes)}
                     seconds={padTime(this.state.seconds)}
                 />
@@ -128,4 +142,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default TimerContainer;
